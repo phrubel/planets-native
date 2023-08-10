@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
 import { colors } from './src/theme/colors';
 import { spacing } from './src/theme/spacing';
 import { useFonts } from 'expo-font';
-import { SafeAreaView } from 'react-native-web';
 import { typography } from './src/theme/typography';
+import Text from './src/components/text/text';
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -19,13 +19,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontFamily: typography.primary }}>
-        Open this App My Phone Yay!!!
-      </Text>
+      <Text preset="h1">Open this App My Phone Yay!!!</Text>
       <Text
+        preset="h2"
         style={{
-          fontFamily: typography.secondary,
-          fontSize: 26,
+          color: 'green',
           marginTop: spacing[1],
         }}
       >
