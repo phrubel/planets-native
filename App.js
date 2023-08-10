@@ -1,10 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors } from './src/theme/colors';
-import { spacing } from './src/theme/spacing';
 import { useFonts } from 'expo-font';
-import { typography } from './src/theme/typography';
 import Text from './src/components/text/text';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/screens/home';
+import { StatusBar } from 'expo-status-bar';
+import Details from './src/screens/details';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -18,27 +22,21 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text preset="h1">Open this App My Phone Yay!!!</Text>
-      <Text
-        preset="h2"
-        style={{
-          color: 'green',
-          marginTop: spacing[1],
-        }}
-      >
-        Open this App My Phone Yay!!!
-      </Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <NavigationContainer theme={DarkTheme}>
+        {/* header have many option, headerShown is one of them */}
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Details" component={Details} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <StatusBar style="light" />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.lightGreen,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
