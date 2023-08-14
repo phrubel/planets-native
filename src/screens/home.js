@@ -1,5 +1,5 @@
-import { View, StyleSheet, FlatList, Pressable } from 'react-native';
-import React from 'react';
+import { View, StyleSheet, FlatList, Pressable, TextInput } from 'react-native';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PlanetHeader from '../components/planetHeader';
 import { colors } from '../theme/colors';
@@ -9,15 +9,38 @@ import { spacing } from '../theme/spacing';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
+  const [searchText, setSearchText] = useState(PLANET_LIST);
+
+  // search Function
+  const searchFilter = (value) => {
+    const filterList = PLANET_LIST.filter((item) => {
+      const itemName = item.name.toLowerCase();
+      const typedText = value.toLowerCase();
+
+      return itemName.indexOf(typedText) > -1;
+    });
+    setSearchText(filterList);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <PlanetHeader />
 
+      {/* Input field */}
+      <TextInput
+        style={styles.textInput}
+        placeholder="type the planet name"
+        placeholderTextColor={colors.orange}
+        autoCorrect={false}
+        onChangeText={(value) => searchFilter(value)}
+      />
+
+      {/* List of planets */}
       {/* This is FlatList */}
       <FlatList
         contentContainerStyle={styles.list}
         //   Data
-        data={PLANET_LIST}
+        data={searchText}
         // keyExtractor
         keyExtractor={(item) => item.name}
         //   Render Item Function
@@ -50,6 +73,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.black,
+  },
+
+  textInput: {
+    padding: spacing[4],
+    borderBottomWidth: 1,
+    borderBottomColor: colors.white,
+    margin: spacing[5],
+    color: colors.white,
   },
   list: {
     padding: spacing[5],
