@@ -28,8 +28,8 @@ export default function PlanetHeader({ backBtn }) {
 const styles = StyleSheet.create({
   container: {
     padding: spacing[5],
-    borderBottomColor: colors.white,
-    borderBottomWidth: 0.1,
+    borderBottomColor: colors.grey,
+    borderBottomWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },

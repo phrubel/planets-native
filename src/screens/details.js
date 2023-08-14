@@ -1,4 +1,11 @@
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  Pressable,
+  Linking,
+} from 'react-native';
 import React from 'react';
 import Text from '../components/text/text';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,12 +18,24 @@ import PlanetBoxDesc from '../components/PlanetBoxDesc';
 export default function Details({ route }) {
   const planet = route.params.planet;
 
-  const { name, description, rotationTime, revolutionTime, radius, avgTemp } =
-    planet;
+  const {
+    name,
+    description,
+    rotationTime,
+    revolutionTime,
+    radius,
+    avgTemp,
+    wikiLink,
+  } = planet;
+
+  const pressLink = () => {
+    Linking.openURL(wikiLink);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <PlanetHeader backBtn={true} />
+
       {/* Details */}
       <ScrollView>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -29,6 +48,7 @@ export default function Details({ route }) {
             }}
           />
         </View>
+
         {/* Description */}
         <View style={styles.details}>
           <Text preset="h1" style={styles.name}>
@@ -37,16 +57,17 @@ export default function Details({ route }) {
           <Text preset="small" style={styles.description}>
             {description}
           </Text>
-          <View style={styles.source}>
+
+          {/* Open wiki link */}
+          <Pressable onPress={pressLink} style={styles.source}>
             <Text>Source:</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.wiki} preset="h4">
-                Wikipedia
-              </Text>
-              <Entypo name="aircraft-take-off" size={20} color="white" />
-            </View>
-          </View>
+            <Text style={styles.wiki} preset="h4">
+              Wikipedia
+            </Text>
+            <Entypo name="aircraft-take-off" size={20} color="white" />
+          </Pressable>
         </View>
+
         {/* Boxes */}
         <View style={{ height: 40 }} />
         <PlanetBoxDesc title="Rotation Time" value={rotationTime} />
@@ -86,6 +107,8 @@ const styles = StyleSheet.create({
   source: {
     flexDirection: 'row',
     marginTop: spacing[8],
+    marginRight: spacing[3],
+    alignItem: 'center',
   },
   wiki: {
     textDecorationLine: 'underline',

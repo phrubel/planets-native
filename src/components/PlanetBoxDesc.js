@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     marginVertical: spacing[4],
     borderWidth: 1,
     borderColor: colors.grey,
+    backgroundColor: colors.darkGray,
   },
   title: {
     textTransform: 'uppercase',

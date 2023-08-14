@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   separator: {
-    borderBottomColor: colors.white,
+    borderBottomColor: colors.grey,
     borderWidth: 0.1,
   },
 });
