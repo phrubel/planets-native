@@ -26,7 +26,7 @@ export default function Home({ navigation }) {
           return (
             // navigation func
             <Pressable
-              onPress={() => navigation.navigate('Details')}
+              onPress={() => navigation.navigate('Details', { planet: item })}
               style={styles.item}
             >
               {/* Render items */}
